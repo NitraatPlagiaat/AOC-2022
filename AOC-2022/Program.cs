@@ -10,6 +10,7 @@ namespace AOC_2022
     {
         static void Main(string[] args)
         {
+            Solutions.s1();
         }
     }
 }
