@@ -16,18 +16,11 @@ namespace AOC_2022
         {
             int total = 0;
             int highest = 0;
-            int amnt = 0;
             int cnt = 0;
             int[] top3 = new int[3];
             string[] lines = File.ReadAllLines("calories.txt");
 
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (lines[i] == "")
-                {
-                    amnt++;
-                }
-            }
+            int amnt = Functions.setArrayLength(lines);
 
             int[] all = new int[amnt];
 
@@ -62,6 +55,22 @@ namespace AOC_2022
             Console.WriteLine(highest); //first answer
             Console.WriteLine(top3[0] + top3[1] + top3[2]); //second answer
             Console.ReadKey();
+        }
+    }
+
+    internal class Functions
+    {
+        internal static int setArrayLength(string[] lines)
+        {
+            int amnt = 0;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i] == "")
+                {
+                    amnt++;
+                }
+            }
+            return amnt;
         }
     }
 }
