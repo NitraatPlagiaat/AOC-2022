@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -54,7 +55,82 @@ namespace AOC_2022
             }
             Console.WriteLine(highest); //first answer
             Console.WriteLine(top3[0] + top3[1] + top3[2]); //second answer
-            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Day 2
+        /// </summary>
+        /// <algo>
+        /// A & X = rock
+        /// B & Y = paper
+        /// C & Z= siscors
+        /// </algo>
+        internal static void day2()
+        {
+            int pointsMe = 0;
+            char[] game = new char[2];
+            int cnt = 0;
+            string[] lines = File.ReadAllLines("RPS.txt");
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                for (int j = 0; j < lines[i].Length; j++)
+                {
+                    if (lines[i][j] != ' ')
+                    {
+                        game[cnt] = lines[i][j];
+                        cnt++;
+                    }
+                }
+                cnt = 0;
+
+                switch (game[1])
+                {
+                    case 'X':
+                        switch (game[0])
+                        {
+                            case 'C':
+                                pointsMe = pointsMe + 6;
+                                break;
+                            case 'A':
+                                pointsMe = pointsMe + 3;
+                                break;
+                            default:
+                                break;
+                        }
+                        pointsMe += 1;
+                        break;
+                    case 'Y':
+                        switch (game[0])
+                        {
+                            case 'A':
+                                pointsMe = pointsMe + 6;
+                                break;
+                            case 'B':
+                                pointsMe = pointsMe + 3;
+                                break;
+                            default:
+                                break;
+                        }
+                        pointsMe = pointsMe + 2;
+                        break;
+                    default:
+                        switch (game[0])
+                        {
+                            case 'B':
+                                pointsMe = pointsMe + 6;
+                                break;
+                            case 'C':
+                                pointsMe = pointsMe + 3;
+                                break;
+                            default:
+                                break;
+                        }
+                        pointsMe = pointsMe + 3;
+                        break;
+                }          
+            }
+            Console.WriteLine("Total points for me: " + pointsMe);
         }
     }
 

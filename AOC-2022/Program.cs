@@ -10,7 +10,8 @@ namespace AOC_2022
     {
         static void Main(string[] args)
         {
-            Solutions.day1();
+            Solutions.day2();
+            Console.ReadKey();
         }
     }
 }
