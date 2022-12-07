@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -95,8 +96,6 @@ namespace AOC_2022
                             case 'A':
                                 pointsMe = pointsMe + 3;
                                 break;
-                            default:
-                                break;
                         }
                         pointsMe += 1;
                         break;
@@ -108,8 +107,6 @@ namespace AOC_2022
                                 break;
                             case 'B':
                                 pointsMe = pointsMe + 3;
-                                break;
-                            default:
                                 break;
                         }
                         pointsMe = pointsMe + 2;
@@ -123,14 +120,74 @@ namespace AOC_2022
                             case 'C':
                                 pointsMe = pointsMe + 3;
                                 break;
-                            default:
-                                break;
                         }
                         pointsMe = pointsMe + 3;
                         break;
                 }          
             }
             Console.WriteLine("Total points for me: " + pointsMe);
+        }
+
+        /// <summary>
+        /// Day 3
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        internal static void day3()
+        {
+            int charCount = 0;
+            int total = 0;
+            string[] lines = File.ReadAllLines("rucksacks.txt");
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                charCount = Functions.setArrayLengthForChars(lines[i], charCount);
+
+                char[] half1 = new char[charCount / 2];
+                char[] half2 = new char[charCount / 2];
+
+                for (int j = 0; j < half1.Length; j++)
+                {
+                    if (char.IsUpper(lines[i][j]))
+                    {
+                        half1[j] = char.ToUpper(lines[i][j]);
+                    }
+                    else
+                    {
+                        half1[j] = lines[i][j];
+                    }
+                }
+                for (int j = 0; j < half2.Length; j++)
+                {
+                    if (char.IsUpper(lines[i][charCount / 2 + j]))
+                    {
+                        half2[j] = char.ToUpper(lines[i][charCount / 2 + j]);
+                    }
+                    else
+                    {
+                        half2[j] = lines[i][charCount / 2 + j];
+                    }
+                }
+
+                for (int j = 0; j < half1.Length; j++)
+                {
+                    for (int k = 0; k < half2.Length; k++)
+                    {
+                        if (half1[j] == half2[k])
+                        {
+                            if (char.IsUpper(half1[j]))
+                            {
+                                total = total + (int)half1[j] - 38;
+                            }
+                            else
+                            {
+                                total = total + (int)half1[j] - 96;
+                            }
+                        }
+                    }
+                }
+                charCount = 0;
+            }
+            Console.WriteLine(total);
         }
     }
 
@@ -147,6 +204,20 @@ namespace AOC_2022
                 }
             }
             return amnt;
+        }
+
+        /// <summary>
+        /// Get the length for an array
+        /// </summary>
+        /// <param name="v"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        internal static int setArrayLengthForChars(string lines, int counter)
+        {
+            foreach (char chr in lines)
+            {
+                counter++;
+            }
+            return counter;
         }
     }
 }
